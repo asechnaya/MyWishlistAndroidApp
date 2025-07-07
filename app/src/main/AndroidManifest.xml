@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    AndroidManifest.xml:
+    This file describes the essential characteristics of the app and defines each of its components.
+    It's crucial for Android to understand what your app is, what permissions it needs,
+    and how its components (activities, services, etc.) interact.
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.myfirstwishlistapp"> <!-- Moved package attribute here -->
+
+    <!--
+        Permissions:
+        Declare permissions your app needs to access sensitive user data or system features.
+        INTERNET permission is essential for your app to communicate with your Django API.
+    -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MyFirstWishlistApp"
+        android:usesCleartextTraffic="true"> <!-- Added for HTTP communication in development -->
+
+        <!--
+            Activity Declaration:
+            Declares the main activity of your application.
+            android:name=".MainActivity" points to your Kotlin MainActivity.kt file.
+            android:exported="true" makes it accessible from outside the app (e.g., launcher).
+            The <intent-filter> with MAIN action and LAUNCHER category makes this the entry point
+            of your app, allowing it to appear in the app launcher.
+        -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.MyFirstWishlistApp">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!--
+            Other application components (services, broadcast receivers, content providers)
+            would be declared here as needed.
+        -->
+
+    </application>
+
+</manifest>
