@@ -11,7 +11,7 @@ object RetrofitClient {
     // IMPORTANT: Replace with your Django server's IP address or domain name
     // If running locally, use your machine's IP address (e.g., http://192.168.1.X:8000/)
     // NOT 127.0.0.1 as the Android emulator runs in its own virtual network.
-    private const val BASE_URL = "http://10.0.2.2:8000/api/" // 10.0.2.2 is the emulator's localhost
+    private const val BASE_URL = "127.0.0.1:8000/api/" // 10.0.2.2 is the emulator's localhost
 
     private val loggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY // Log request and response bodies
