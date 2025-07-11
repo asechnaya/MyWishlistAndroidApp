@@ -3,9 +3,6 @@
 *.ap_
 *.aab
 
-# Kotlin-specific files
-.kotlin/
-
 # Files for the ART/Dalvik VM
 *.dex
 
@@ -8007,3 +8004,4 @@ key.properties
 *.vmsn.vmx
 *.vmsn.vmxf
 *.vmsn.vmss
+*.vmsn.
