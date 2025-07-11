@@ -1,47 +1,59 @@
+// app/src/main/java/com/example/myfirstwishlistapp/MainActivity.kt
 package com.example.myfirstwishlistapp
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.myfirstwishlistapp.ui.theme.MyFirstWishlistAppTheme
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import com.example.myfirstwishlistapp.api.RetrofitClient
+import kotlinx.coroutines.launch
 
-class MainActivity : ComponentActivity() {
+// REMOVED: @file:Suppress("UNUSED_PARAMETER") or any Compose annotations at the top
+
+class MainActivity : AppCompatActivity() {
+
+    private val TAG = "MainActivity"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            MyFirstWishlistAppTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+        // Set the content view to your XML layout file (e.g., activity_main.xml)
+        setContentView(R.layout.activity_main)
+
+        // Example of fetching data from your Django API
+        fetchMainFeed()
+    }
+
+    private fun fetchMainFeed() {
+        lifecycleScope.launch {
+            try {
+                val response = RetrofitClient.instance.getMainFeed()
+                if (response.isSuccessful && response.body() != null) {
+                    val wishes = response.body()
+                    Log.d(TAG, "Fetched ${wishes?.size} wishes from main feed.")
+                    // TODO: Update your UI (e.g., a RecyclerView or TextView) with the fetched wishes
+                    // Example: If you had a TextView with ID 'my_text_view' in activity_main.xml
+                    // val textView: TextView = findViewById(R.id.my_text_view)
+                    // textView.text = "Fetched ${wishes?.size} wishes: ${wishes?.joinToString { it.title }}"
+                } else {
+                    Log.e(TAG, "Error fetching main feed: ${response.code()} - ${response.message()}")
                 }
+            } catch (e: Exception) {
+                Log.e(TAG, "Network error fetching main feed: ${e.message}", e)
             }
         }
     }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    MyFirstWishlistAppTheme {
-        Greeting("Android")
-    }
+    // REMOVED: All @Composable functions and related Compose preview code
+    // For example, if you had:
+    // @Composable
+    // fun Greeting(name: String, modifier: Modifier = Modifier) {
+    //     Text(text = "Hello $name!", modifier = modifier)
+    // }
+    // @Preview(showBackground = true)
+    // @Composable
+    // fun DefaultPreview() {
+    //     MyFirstWishlistAppTheme {
+    //         Greeting("Android")
+    //     }
+    // }
 }
