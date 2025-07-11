@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <style name="Theme.MyFirstWishlistApp" parent="android:Theme.Material.Light.NoActionBar" />
+    <!--
+        Base application theme.
+        This theme inherits from a Theme.AppCompat theme, which is required by AppCompatActivity.
+        You can customize colors, fonts, etc., here.
+    -->
+    <style name="Theme.MyFirstWishlistApp" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#6200EE</item>
+        <item name="colorPrimaryDark">#3700B3</item>
+        <item name="colorAccent">#03DAC5</item>
+        <!-- Optional: set windowTranslucentStatus to false if you want a solid status bar -->
+        <item name="android:windowTranslucentStatus">false</item>
+    </style>
 </resources>
